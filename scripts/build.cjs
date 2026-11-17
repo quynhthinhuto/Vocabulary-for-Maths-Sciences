@@ -1,0 +1,11 @@
+const fs=require('node:fs'),vm=require('node:vm');
+const c=vm.createContext({});
+for(const f of ['data','catalog','curriculum-data','curriculum'])vm.runInContext(fs.readFileSync('dist/'+f+'.js','utf8'),c);
+const syllabus=JSON.parse(vm.runInContext('JSON.stringify({lessons:LESSONS.map(l=>({id:l.id,subject:l.subject,grade:l.grade,en:l.en,title:l.title,wordIds:l.wordIds})),words:WORDS.filter(w=>w.active).map(w=>({id:w.id,en:w.en,vi:w.vi,grade:w.grade,subject:w.subject,lessonIds:w.lessonIds}))})',c));
+const assets={};for(const f of fs.readdirSync('dist'))if(/\.(html|css|js)$/.test(f))assets['/'+f]=fs.readFileSync('dist/'+f,'utf8');
+fs.mkdirSync('dist/server',{recursive:true});fs.mkdirSync('dist/.openai',{recursive:true});
+vm.runInContext(fs.readFileSync('dist/audio-manifest.js','utf8'),c);
+const audioKeys=JSON.parse(vm.runInContext('JSON.stringify(Object.values(PRONUNCIATION_AUDIO))',c));
+const source=fs.readFileSync('worker/index.js','utf8').replace('/* EMBEDDED_ASSETS */',()=>JSON.stringify(assets)).replace('/* EMBEDDED_SYLLABUS */',()=>JSON.stringify(syllabus)).replace('/* EMBEDDED_AUDIO_KEYS */',()=>JSON.stringify(audioKeys)).replace('/* PRONUNCIATION_ROUTES */',()=>fs.readFileSync('worker/audio.js','utf8'));
+fs.writeFileSync('dist/server/index.js',source);fs.copyFileSync('.openai/hosting.json','dist/.openai/hosting.json');
+console.log('Built Worker with '+Object.keys(assets).length+' assets and D1 classroom API.');

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#245fa6">
+  <meta name="description" content="Khám phá từ vựng STEM Anh–Việt từ lớp 1 đến lớp 12. Học bằng thẻ từ, nghe phát âm và luyện tập mỗi ngày cùng LexiLab.">
+  <title>LexiLab · English–Vietnamese STEM | Từ vựng STEM Anh–Việt</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23245fa6'/%3E%3Cpath d='M18 17h10v27h20v9H18z' fill='white'/%3E%3Ccircle cx='43' cy='21' r='8' fill='%23cafa84'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;450;500;550;600;650;700;750;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20261117-no-guide1">
+  <link rel="stylesheet" href="theme-blue.css?v=20261117-no-guide1">
+  <link rel="stylesheet" href="theme-simple.css?v=20261117-no-guide1">
+  <script defer src="data.js?v=20261117-no-guide1"></script>
+  <script defer src="catalog.js?v=20261117-no-guide1"></script>
+  <script defer src="curriculum-data.js?v=20261117-no-guide1"></script>
+  <script defer src="curriculum.js?v=20261117-no-guide1"></script>
+  <script defer src="audio-manifest.js?v=20261117-no-guide1"></script>
+  <script defer src="app.js?v=20261117-no-guide1"></script>
+  <script defer src="pronunciation.js?v=20261117-no-guide1"></script>
+  <script src="classroom.js?v=20261117-no-guide1" defer></script>
+</head>
+<body>
+  <div id="app"></div>
+  <section id="pronunciation-player" class="pronunciation-player" aria-label="Pronunciation / Phát âm" hidden>
+    <div class="pronunciation-heading"><span>PRONUNCIATION / PHÁT ÂM</span><button type="button" data-action="audio-close" aria-label="Close audio / Đóng âm thanh">×</button></div>
+    <h2 id="pronunciation-word" lang="en"></h2>
+    <p id="pronunciation-meaning" lang="vi"></p>
+    <audio id="pronunciation-audio" controls preload="none" playsinline aria-label="Play English pronunciation / Phát âm tiếng Anh" tabindex="0"></audio>
+    <p id="pronunciation-status" class="pronunciation-status" role="status" aria-live="polite"></p>
+    <button type="button" class="btn primary" data-action="audio-replay">Play again / Nghe lại</button>
+    <details><summary>No sound? / Chưa nghe được?</summary><div class="pronunciation-actions"><a id="pronunciation-open" target="_blank" rel="noopener">Open audio / Mở âm thanh ↗</a><button type="button" id="pronunciation-device" data-action="audio-device" hidden>Device voice / Giọng máy</button></div><p>Turn up media volume and check whether sound is going to headphones or Bluetooth. You can also tap Open audio.<br><span lang="vi">Tăng âm lượng phát nội dung, kiểm tra tai nghe hoặc Bluetooth. Bạn cũng có thể bấm Mở âm thanh.</span></p></details>
+  </section>
+  <div id="modal-root"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
